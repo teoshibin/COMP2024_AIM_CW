@@ -5,6 +5,7 @@ AI method coursework BBOB optimization MATLAB code and datasets
 - uncomment and comment different algorithm in [exampleexperiment](Algorithms/exampleexperiment.m)
 - generate data with [2010 BBOB framework](https://coco.gforge.inria.fr/doku.php?id=bbob-2010-downloads) by running [exampleexperiment](Algorithms/exampleexperiment.m) in MATLAB
 - post-process data with [numbbo framework](https://github.com/numbbo/coco/)
+
 	```Sh
 		python -m cocopp [-o OUTPUT_FOLDERNAME] YOURDATAFOLDER [MORE_DATAFOLDERS]
 	```
