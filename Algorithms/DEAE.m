@@ -242,19 +242,7 @@ function DEAE(FUN, DIM, ftarget, maxfunevals)
         % find better individuals
         ind = find(popfit>offspringfit);
         
-        % save into archive
-        %    if (nBestToArchive > 0)
-        %       for i = ind
-        %          if (archiveCount < nBestToArchive)
-        %             archiveCount = archiveCount + 1;
-        %             randPosArchive = archiveCount;
-        %          else
-        %             randPosArchive = randi(archiveCount);
-        %          end
-        %
-        %          archive(:,randPosArchive) = pop_de(:,i);
-        %       end
-        %    end
+
         if (nBestToArchive > 0 && ~isempty(ind))
             archiveCount = size(archive,2);
             auxArchive(:,1:(archiveCount + length(ind))) = [archive, pop_de(:,ind)];
