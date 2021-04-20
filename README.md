@@ -1,5 +1,5 @@
 # COMP2039_AIM_CW
-AI method coursework BBOB optimization MATLAB code and datasets
+AI method coursework function optimization algorithm MATLAB code and datasets
 
 # Usage
 - uncomment and comment different algorithm in [exampleexperiment](Algorithms/exampleexperiment.m)
