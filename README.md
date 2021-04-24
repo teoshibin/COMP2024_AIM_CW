@@ -53,5 +53,3 @@ AI method coursework function optimization algorithm MATLAB code and datasets
 		info2excel\info2excel.py -i JADE -d 40
 		info2excel\info2excel.py -i JADE -o JADE_FSMAP
 	```
-
-Output excel [here](output.xlsx)
