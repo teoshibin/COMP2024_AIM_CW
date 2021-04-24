@@ -4,9 +4,13 @@
 % CAPITALIZATION indicates code adaptations to be made
 
 addpath(pwd);  % should point to fgeneric.m etc.
-datapath = '../DEAE';  % different folder for each experiment
-opt.algName = 'DEAE';
-opt.comments = 'Differential Evolution with Adaptive Encoding Algorithm';
+datapath = '../Datasets/PSO_Bounds';  % different folder for each experiment
+opt.algName = 'PSO_Bounds';
+
+% opt.comments = 'Differential Evolution with Adaptive Encoding Algorithm'; % DEAE
+% opt.comments = 'Partical Swarm Optimization' % PSO
+opt.comments = 'Population-Based Incremental Learning PSO'; % PSO_Bounds
+
 maxfunevals = '5e4'; % 10*dim is a short test-experiment taking a few minutes 
                           % INCREMENT maxfunevals successively to larger value(s)
 minfunevals = 'dim + 2';  % PUT MINIMAL SENSIBLE NUMBER OF EVALUATIONS for a restart
@@ -29,6 +33,10 @@ for dim = [2,3,5,10,20,40]  % small dimensions first, for CPU reasons
                 % PSO('fgeneric', dim, fgeneric('ftarget'), ...
                 %             eval(maxfunevals) - fgeneric('evaluations'));
                 
+                % Running PSO_Bounds Algorithm
+                PSO_Bounds('fgeneric', dim, fgeneric('ftarget'), ...
+                    eval(maxfunevals) - fgeneric('evaluations'));
+                
                 % Running DE Algorithm
                 % DE('fgeneric', dim, fgeneric('ftarget'), ...             
                 %        eval(maxfunevals) - fgeneric('evaluations'));
@@ -38,8 +46,8 @@ for dim = [2,3,5,10,20,40]  % small dimensions first, for CPU reasons
                 %       eval(maxfunevals) - fgeneric('evaluations'));
                 
                 % Running DEAE Algorithm
-                 DEAE('fgeneric', dim, fgeneric('ftarget'), ...             
-                        eval(maxfunevals) - fgeneric('evaluations'));
+                % DEAE('fgeneric', dim, fgeneric('ftarget'), ...             
+                %        eval(maxfunevals) - fgeneric('evaluations'));
                     
                 if fgeneric('fbest') < fgeneric('ftarget') || ...
                    fgeneric('evaluations') + eval(minfunevals) > eval(maxfunevals)
