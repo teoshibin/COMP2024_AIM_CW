@@ -3,7 +3,7 @@ AI method coursework function optimization algorithm MATLAB code and datasets
 
 # Rules
 1. set path that points to fgeneric as "pwd" e.g. `addpath(pwd)`
-2. set `datapath = '../ALGONAME'`
+2. set `datapath = '../Datasets/ALGONAME'`
 3. set `maxfunevals = '5e4'`
 
 # Usage
