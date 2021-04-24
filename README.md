@@ -17,6 +17,7 @@ AI method coursework function optimization algorithm MATLAB code and datasets
 	```
 
 ## Generate Excel from info log
+### Installation
 1. navigate into the repository
 
 	```Sh
@@ -36,7 +37,10 @@ AI method coursework function optimization algorithm MATLAB code and datasets
 	```Sh
 		pip install -r info2excel\requirements.txt
 	```
-5. run python script
+### Execution
+1. activate virtual environment (step 3 of installation)
+
+3. run python script
 	```Sh
 		info2excel\info2excel.py -i [DATASET]
 		# or
