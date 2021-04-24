@@ -103,7 +103,9 @@ def main(argv):
     data = abs(data) # remove negative sign
     df = createDataframe(data, 24)
     print(df)
-    df.where(df > 1000, 1000, inplace=True)
+    df.where(df <= 1000, 1000, inplace=True)
+    # when df <= 1000 then do not replace
+    # when df > 1000 then replace with 1000
 
     df.to_excel(excelname + ".xlsx")
 
