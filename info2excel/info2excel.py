@@ -6,7 +6,7 @@ import sys, getopt
 
 # convert delta f opt from different files into 2d array
 def infoTo2dlist(dataset_folder, name, extensions, number_benchmarks):
-    os.path.join(os.path.dirname(os.getcwd()), dataset_folder)
+    # os.path.join(os.path.dirname(os.getcwd()), dataset_folder)
     paths = getPaths(dataset_folder, name, extensions, number_benchmarks)
     dimensions = getDimensions(paths[0]);
     line_to_read = [x*3+2 for x in range(0, dimensions)]
