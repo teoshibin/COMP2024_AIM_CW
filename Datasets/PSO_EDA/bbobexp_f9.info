@@ -1,0 +1,18 @@
+funcId = 9, DIM = 2, Precision = 1.000e-08, algId = 'PSO_EDA'
+% PSO with Estimation of Distribution Evolutionary Algorithm
+data_f9\bbobexp_f9_DIM2.dat, 1:23520|-2.9e-09, 2:28280|-9.8e-09, 3:7000|-7.9e-09, 4:22040|-5.1e-09, 5:25640|-9.6e-09, 6:19240|-1.5e-09, 7:9240|-7.1e-09, 8:21880|-9.1e-09, 9:11840|-4.0e-09, 10:6560|-5.8e-09, 11:30240|-5.4e-09, 12:22400|-6.7e-09, 13:27080|-1.4e-09, 14:32400|-4.5e-09, 15:16520|-9.9e-09
+funcId = 9, DIM = 3, Precision = 1.000e-08, algId = 'PSO_EDA'
+% PSO with Estimation of Distribution Evolutionary Algorithm
+data_f9\bbobexp_f9_DIM3.dat, 1:50000|7.2e-09, 2:50000|6.2e-09, 3:50000|7.0e-04, 4:50000|5.7e-04, 5:50000|7.0e-06, 6:48480|-4.4e-09, 7:50000|5.5e-07, 8:50000|5.8e-07, 9:50000|5.8e-07, 10:50000|4.3e-04, 11:50000|3.1e-09, 12:46200|-4.2e-09, 13:50000|5.5e-05, 14:50000|2.5e-05, 15:50000|2.6e-04
+funcId = 9, DIM = 5, Precision = 1.000e-08, algId = 'PSO_EDA'
+% PSO with Estimation of Distribution Evolutionary Algorithm
+data_f9\bbobexp_f9_DIM5.dat, 1:50000|1.9e-01, 2:50000|1.9e-01, 3:50000|9.1e-02, 4:50000|1.1e-01, 5:50000|1.6e-02, 6:50000|1.3e-01, 7:50000|3.7e-01, 8:50000|3.6e-01, 9:50000|1.8e-01, 10:50000|2.1e-01, 11:50000|7.5e-02, 12:50000|8.4e-02, 13:50000|2.0e-01, 14:50000|4.5e-02, 15:50000|1.9e-01
+funcId = 9, DIM = 10, Precision = 1.000e-08, algId = 'PSO_EDA'
+% PSO with Estimation of Distribution Evolutionary Algorithm
+data_f9\bbobexp_f9_DIM10.dat, 1:50000|8.0e+00, 2:50000|1.1e+01, 3:50000|9.1e+00, 4:50000|9.1e+00, 5:50000|6.4e+00, 6:50000|9.1e+00, 7:50000|9.0e+00, 8:50000|7.3e+00, 9:50000|9.1e+00, 10:50000|9.0e+00, 11:50000|8.9e+00, 12:50000|8.3e+00, 13:50000|9.5e+00, 14:50000|7.8e+00, 15:50000|8.7e+00
+funcId = 9, DIM = 20, Precision = 1.000e-08, algId = 'PSO_EDA'
+% PSO with Estimation of Distribution Evolutionary Algorithm
+data_f9\bbobexp_f9_DIM20.dat, 1:50000|1.1e+02, 2:50000|7.2e+01, 3:50000|7.4e+01, 4:50000|7.0e+01, 5:50000|6.5e+01, 6:50000|7.8e+01, 7:50000|7.4e+01, 8:50000|9.9e+01, 9:50000|6.7e+01, 10:50000|7.5e+01, 11:50000|6.8e+01, 12:50000|6.0e+01, 13:50000|9.9e+01, 14:50000|6.8e+01, 15:50000|6.9e+01
+funcId = 9, DIM = 40, Precision = 1.000e-08, algId = 'PSO_EDA'
+% PSO with Estimation of Distribution Evolutionary Algorithm
+data_f9\bbobexp_f9_DIM40.dat, 1:50000|9.3e+02, 2:50000|5.4e+02, 3:50000|7.2e+02, 4:50000|8.0e+02, 5:50000|6.4e+02, 6:50000|9.6e+02, 7:50000|1.0e+03, 8:50000|5.5e+02, 9:50000|5.3e+02, 10:50000|9.5e+02, 11:50000|9.9e+02, 12:50000|7.8e+02, 13:50000|6.5e+02, 14:50000|5.5e+02, 15:50000|1.0e+03
