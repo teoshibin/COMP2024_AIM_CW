@@ -76,25 +76,28 @@ def main(argv):
     number_benchmarks = 24
     datasetFile = ''
     excelname = 'output'
+    dimension = 5
 
     try:
-        opts, args = getopt.getopt(argv,"i:o:",["ifile=", "ofile="])
+        opts, args = getopt.getopt(argv,"i:d:o:",["ifile=", "--dimension", "ofile="])
     except getopt.GetoptError:
-        print('info2excel.py -i [FOLDERNAME] -o [EXCELFILENAME]\ninfo2excel.py -i [FOLDERNAME]')
+        print('info2excel.py -i [FOLDERNAME] -d [DIMENSION] -o [EXCELFILENAME]\ninfo2excel.py -i [FOLDERNAME]')
         sys.exit(2)
 
     for opt, arg in opts:
         if opt in ("-i", "--ifile"):
             datasetFile = arg
+        elif opt in ("-d", "--dimension"):
+            dimension = int(arg)
         elif opt in ("-o", "--ofile"):
             excelname = arg
     
     if len(datasetFile) == 0:
-        print('info2excel.py -i [FOLDERNAME] -o [EXCELFILENAME]\ninfo2excel.py -i [FOLDERNAME]')
+        print('info2excel.py -i [FOLDERNAME] -d [DIMENSION] -o [EXCELFILENAME]\ninfo2excel.py -i [FOLDERNAME]')
         sys.exit(2)
 
     data = infoTo2dlist(datasetFile, 'bbobexp_f', '.info', number_benchmarks)
-    data = querySpecificDimension(data, number_benchmarks, dimensions.index(5)) # query 5d results only
+    data = querySpecificDimension(data, number_benchmarks, dimensions.index(dimension))
 
     data = double(data) # convert string to double
     data = abs(data) # remove negative sign
