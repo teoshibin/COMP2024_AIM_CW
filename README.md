@@ -16,7 +16,7 @@ AI method coursework function optimization algorithm MATLAB code and datasets
 		python -m cocopp [-o OUTPUT_FOLDERNAME] YOURDATAFOLDER [MORE_DATAFOLDERS]
 	```
 
-## Generate Excel from info log
+## Generate delta ftarget values Excel from info log
 ### Installation
 1. navigate into the repository
 
