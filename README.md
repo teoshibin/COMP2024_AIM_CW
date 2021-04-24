@@ -15,6 +15,13 @@ AI method coursework function optimization algorithm MATLAB code and datasets
 	```Sh
 		python -m cocopp [-o OUTPUT_FOLDERNAME] YOURDATAFOLDER [MORE_DATAFOLDERS]
 	```
+	Example Command
+	```Sh
+		cd Datasets
+		python -m cocopp -o "..\Post_Processing\PSO_ppdata" "PSO"
+	```
+	> **Note**   
+	> Path to datasets will be used as algorithm name in ppdata, this is why we cd into the datasets
 
 ## Generate delta ftarget values Excel from info log
 ### Installation
