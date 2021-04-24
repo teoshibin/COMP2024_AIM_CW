@@ -27,7 +27,7 @@ AI method coursework function optimization algorithm MATLAB code and datasets
 	```Sh
 		python -m venv info2excel\venv
 	```
-3. activate virtual environment
+3. activate virtual environment (a prefix of "(venv)" will be displayed in your command prompt when succesfully activated)
 	```Sh
 		info2excel\venv\Scripts\activate
 		# or
@@ -44,7 +44,7 @@ AI method coursework function optimization algorithm MATLAB code and datasets
 	```Sh
 		info2excel\info2excel.py -i [DATASET]
 		# or
-		info2excel\info2excel.py -i [DATASET] -d[DIMENSION] -o [EXCELNAME]
+		info2excel\info2excel.py -i [DATASET] -d [DIMENSION] -o [EXCELNAME]
 		# optional d & o, default d = 5, o = 'output'
 	```
 	Example command
@@ -53,5 +53,3 @@ AI method coursework function optimization algorithm MATLAB code and datasets
 		info2excel\info2excel.py -i JADE -d 40
 		info2excel\info2excel.py -i JADE -o JADE_FSMAP
 	```
-
-Output excel [here](output.xlsx)
