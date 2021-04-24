@@ -49,7 +49,7 @@ AI method coursework function optimization algorithm MATLAB code and datasets
 	```
 	Example command
 	```Sh
-		info2excel\info2excel.py -i JADE
-		info2excel\info2excel.py -i JADE -d 40
-		info2excel\info2excel.py -i JADE -o JADE_FSMAP
+		info2excel\info2excel.py -i Datasets/JADE
+		info2excel\info2excel.py -i Datasets/JADE -d 40
+		info2excel\info2excel.py -i Datasets/JADE -o JADE_FSMAP
 	```
