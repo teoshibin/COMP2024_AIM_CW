@@ -1,8 +1,10 @@
 
 import os
-from numpy import double
+from numpy import double, fill_diagonal
 import pandas as pd
 import sys, getopt
+from shutil import copyfile
+from openpyxl import load_workbook
 
 # convert delta f opt from different files into 2d array
 def infoTo2dlist(dataset_folder, name, extensions, number_benchmarks):
@@ -72,31 +74,52 @@ def countLine(path):
 
 def main(argv):
 
+    ### Main Parameters ###
+    ## benchmarks ##
     dimensions = [2, 3, 5, 10 , 20, 40]
     number_benchmarks = 24
-    datasetFile = ''
-    excelname = 'output'
     dimension = 5
 
+    ## preset IO folder name ##
+    dir = os.path.dirname(__file__)
+    dataset_folder = os.path.join(dir, os.pardir, 'Datasets')
+    output_folder = os.path.join(dir, os.pardir, 'ExcelScore')
+    algorithm_name = ''
+    excelname = ''
+
+    ### Main script ###
+    ## error msg ##
+    wrong_syntax_msg = ('info2excel.py -i [ALGONAME] -d [DIMENSION] -o [EXCELNAME]\n'
+                        'info2excel.py -i [ALGONAME]\n'
+                        '-d & o by default is 5 & "[ALGONAME]_[DIMENSION]D"\n')
+
+    ## parse in args ##
     try:
         opts, args = getopt.getopt(argv,"i:d:o:",["ifile=", "--dimension", "ofile="])
     except getopt.GetoptError:
-        print('info2excel.py -i [FOLDERNAME] -d [DIMENSION] -o [EXCELFILENAME]\ninfo2excel.py -i [FOLDERNAME]')
+        print(wrong_syntax_msg)
         sys.exit(2)
 
     for opt, arg in opts:
         if opt in ("-i", "--ifile"):
-            datasetFile = arg
+            algorithm_name = arg
         elif opt in ("-d", "--dimension"):
             dimension = int(arg)
         elif opt in ("-o", "--ofile"):
             excelname = arg
     
-    if len(datasetFile) == 0:
-        print('info2excel.py -i [FOLDERNAME] -d [DIMENSION] -o [EXCELFILENAME]\ninfo2excel.py -i [FOLDERNAME]')
+    if len(algorithm_name) == 0:
+        print(wrong_syntax_msg)
         sys.exit(2)
+    
+    if len(excelname) == 0:
+        excelname = algorithm_name + '_' + str(dimension) + 'D'
 
-    data = infoTo2dlist(datasetFile, 'bbobexp_f', '.info', number_benchmarks)
+    ## data retrieval ##
+    full_dataset_path = os.path.join(dataset_folder, algorithm_name)
+    full_output_path = os.path.join(output_folder, excelname + '.xlsx')
+
+    data = infoTo2dlist(full_dataset_path, 'bbobexp_f', '.info', number_benchmarks)
     data = querySpecificDimension(data, number_benchmarks, dimensions.index(dimension))
 
     data = double(data) # convert string to double
@@ -107,7 +130,16 @@ def main(argv):
     # when df <= 1000 then do not replace
     # when df > 1000 then replace with 1000
 
-    df.to_excel(excelname + ".xlsx")
+    ## output value into exisiting excel template ##
+    copyfile(os.path.join(dir, 'template.xlsx'), full_output_path)
+
+    book = load_workbook(full_output_path)
+    writer = pd.ExcelWriter(full_output_path, engine='openpyxl') 
+    writer.book = book
+
+    writer.sheets = dict((ws.title, ws) for ws in book.worksheets)
+    df.to_excel(writer, 'Sheet1', index=False, header=False, startcol=1, startrow=1)
+    writer.save()
 
 if __name__ == "__main__":
     main(sys.argv[1:])
