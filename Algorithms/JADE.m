@@ -1,6 +1,16 @@
-
-%%% This code is a refactored version of the source code available online.
-%%% Please find the online source code citation below.
+% JADE is an adaptive version of Differential Evolution (DE)  algorithm.
+%
+% The main differences between JADE and classic DE include the following.
+% 1. Option to use archive of parent solutions
+% 2. Mutation strategy called "current-to-pbest"
+% 3. Adaptation of mutation factor and crossover probability
+%
+% The initial crossover probability is 0.5.
+% The inital mutation factor is 0.5.
+% A population size of 5*DIM is set.
+%
+% This code is a refactored version of the source code available online.
+% Please find the online source code citation as shown below.
 %%%--------------------------------------------------------------------------------------------------%%%
 %    Title: JADE Source Code
 %    Author: Pošík and Klemš
@@ -8,13 +18,15 @@
 %    Code version: 1
 %    Availability: https://coco.gforge.inria.fr/doku.php?id=bbob-2012-algorithms
 %%%--------------------------------------------------------------------------------------------------%%%
-%%% (Version 1)[Source Code].https://coco.gforge.inria.fr/doku.php?id=bbob-2012-algorithms
-
+% (Version 1)[Source Code].https://coco.gforge.inria.fr/doku.php?id=bbob-2012-algorithms
+  
 function JADE(FUN, DIM, ftarget, maxfunevals)
-   % JADE (FUN, DIM, ftarget, maxfunevals)
-    maxfunevals = min(1e8 * DIM, maxfunevals); % set maximum number of fitness evaluations
+    % JADE (FUN, DIM, ftarget, maxfunevals)
+   
+    % setting maximum number of fitness evaluations
+    maxfunevals = min(1e8 * DIM, maxfunevals); 
     
-    % maxpopsize = inf
+    % maximum population size is set to inf
     popsize = min(5*DIM, inf);   % set parental population size 
     offspringsize = popsize; % set offspring size
     
