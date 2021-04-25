@@ -15,7 +15,7 @@ AI method coursework function optimization algorithm MATLAB code and datasets
 	```Sh
 		python -m cocopp [-o OUTPUT_FOLDERNAME] YOURDATAFOLDER [MORE_DATAFOLDERS]
 	```
-	Example Command
+	Example command
 	```Sh
 		cd Datasets
 		python -m cocopp -o "..\Post_Processing\PSO_ppdata" "PSO"
@@ -49,14 +49,18 @@ AI method coursework function optimization algorithm MATLAB code and datasets
 
 3. run python script
 	```Sh
-		info2excel\info2excel.py -i [DATASET]
-		# or
+		info2excel\info2excel.py -i [DATASET] 					# or
 		info2excel\info2excel.py -i [DATASET] -d [DIMENSION] -o [EXCELNAME]
-		# optional d & o, default d = 5, o = 'output'
+		# optional d & o by default is 5 & "[ALGONAME]_[DIMENSION]D"
 	```
 	Example command
 	```Sh
-		info2excel\info2excel.py -i Datasets/JADE
-		info2excel\info2excel.py -i Datasets/JADE -d 40
-		info2excel\info2excel.py -i Datasets/JADE -o JADE_FSMAP
+		info2excel\info2excel.py -i JADE 		#or
+		info2excel\info2excel.py -i JADE -d 40		#or
+		info2excel\info2excel.py -i JADE -o JADE_FSMAP
+	```
+	Complete command flow
+	```Sh
+		cd info2excel
+		info2excel.py -i PSO_Bounds
 	```
