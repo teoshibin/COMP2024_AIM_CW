@@ -1,3 +1,15 @@
+
+%%% This code is a refactored version of the source code available online.
+%%% Please find the online source code citation below.
+%%%--------------------------------------------------------------------------------------------------%%%
+%    Title: JADE Source Code
+%    Author: Pošík and Klemš
+%    Date: 2012
+%    Code version: 1
+%    Availability: https://coco.gforge.inria.fr/doku.php?id=bbob-2012-algorithms
+%%%--------------------------------------------------------------------------------------------------%%%
+%%% (Version 1)[Source Code].https://coco.gforge.inria.fr/doku.php?id=bbob-2012-algorithms
+
 function JADE(FUN, DIM, ftarget, maxfunevals)
    % JADE (FUN, DIM, ftarget, maxfunevals)
     maxfunevals = min(1e8 * DIM, maxfunevals); % set maximum number of fitness evaluations
