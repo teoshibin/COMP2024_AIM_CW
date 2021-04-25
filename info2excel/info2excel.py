@@ -1,10 +1,18 @@
 
+### Credits ###
+# by Shi Bin Teo
+# https://github.com/teoshibin
+
+### Imports ###
+
 import os
-from numpy import double, fill_diagonal
+from numpy import double
 import pandas as pd
 import sys, getopt
 from shutil import copyfile
 from openpyxl import load_workbook
+
+### Main Functions ###
 
 # convert delta f opt from different files into 2d array
 def infoTo2dlist(dataset_folder, name, extensions, number_benchmarks):
@@ -31,7 +39,7 @@ def infoTo2dlist(dataset_folder, name, extensions, number_benchmarks):
 
     return data
 
-# export 2d list to excel
+# convert 2d list to pandas dataframe
 def createDataframe(datalist, number_benchmarks):
     number_instance = len(datalist[0])
     mycolumns = ['Instance ' + str(x) for x in range(1, number_instance + 1)]
@@ -50,6 +58,8 @@ def querySpecificDimension(data, number_benchmarks, selected_dimension_id):
         if (i+1) % number_dimensions == 0:
             benchmark_count += 1
     return new_data
+
+### Helper Functions ###
 
 def getPaths(folder, name, extensions, number_benchmarks):
     paths = []
@@ -79,6 +89,7 @@ def main(argv):
     dimensions = [2, 3, 5, 10 , 20, 40]
     number_benchmarks = 24
     dimension = 5
+    precision = 1e-8
 
     ## preset IO folder name ##
     dir = os.path.dirname(__file__)
@@ -92,10 +103,11 @@ def main(argv):
     wrong_syntax_msg = ('info2excel.py -i [ALGONAME] -d [DIMENSION] -o [EXCELNAME]\n'
                         'info2excel.py -i [ALGONAME]\n'
                         '-d & o by default is 5 & "[ALGONAME]_[DIMENSION]D"\n')
+    wrong_dimensions_msg = '--dimension not found in' + str(dimensions)
 
     ## parse in args ##
     try:
-        opts, args = getopt.getopt(argv,"i:d:o:",["ifile=", "--dimension", "ofile="])
+        opts, args = getopt.getopt(argv,"i:d:p:o:",["ifile=", "dimension=", "precision=", "ofile="])
     except getopt.GetoptError:
         print(wrong_syntax_msg)
         sys.exit(2)
@@ -104,14 +116,21 @@ def main(argv):
         if opt in ("-i", "--ifile"):
             algorithm_name = arg
         elif opt in ("-d", "--dimension"):
-            dimension = int(arg)
+            dimension = abs(int(arg))
+        elif opt in ("-p", "--precision"):
+            precision = abs(double(arg))
         elif opt in ("-o", "--ofile"):
             excelname = arg
     
+    ## validation ##
     if len(algorithm_name) == 0:
         print(wrong_syntax_msg)
         sys.exit(2)
-    
+
+    if not( dimension in dimensions):
+        print(wrong_dimensions_msg)
+        sys.exit(2)
+
     if len(excelname) == 0:
         excelname = algorithm_name + '_' + str(dimension) + 'D'
 
@@ -123,9 +142,12 @@ def main(argv):
     data = querySpecificDimension(data, number_benchmarks, dimensions.index(dimension))
 
     data = double(data) # convert string to double
-    data = abs(data) # remove negative sign
     df = createDataframe(data, 24)
+    # df = df.add(precision) # shift value
+    df = df.abs()
+
     print(df)
+
     df.where(df <= 1000, 1000, inplace=True)
     # when df <= 1000 then do not replace
     # when df > 1000 then replace with 1000
