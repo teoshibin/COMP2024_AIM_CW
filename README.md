@@ -63,4 +63,5 @@ AI method coursework function optimization algorithm MATLAB code and datasets
 	```Sh
 		cd info2excel
 		info2excel.py -i PSO_Bounds
+		# output : PSO_Bounds_5D.xlsx
 	```
