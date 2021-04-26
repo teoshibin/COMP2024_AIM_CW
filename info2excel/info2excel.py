@@ -134,7 +134,7 @@ def main(argv):
         sys.exit(2)
 
     if len(excelname) == 0:
-        excelname = algorithm_name + '_' + str(dimension) + 'D'
+        excelname = algorithm_name + '_' + str(precision) + '_' + str(dimension) + 'D'
 
     ## data retrieval ##
     full_dataset_path = os.path.join(dataset_folder, algorithm_name)
