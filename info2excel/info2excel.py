@@ -91,6 +91,7 @@ def main(argv):
     number_benchmarks = 24
     dimension = 5
     precision = 1e-8
+    method = 2
 
     ## preset IO folder name ##
     dir = os.path.dirname(__file__)
@@ -108,7 +109,7 @@ def main(argv):
 
     ## parse in args ##
     try:
-        opts, args = getopt.getopt(argv,"i:d:p:o:",["ifile=", "dimension=", "precision=", "ofile="])
+        opts, args = getopt.getopt(argv,"i:d:m:p:o:",["ifile=", "dimension=", "method=", "precision=", "ofile="])
     except getopt.GetoptError:
         print(wrong_syntax_msg)
         sys.exit(2)
@@ -118,18 +119,18 @@ def main(argv):
             algorithm_name = arg
         elif opt in ("-d", "--dimension"):
             dimension = abs(int(arg))
+        elif opt in ("-m", "--method"):
+            method = abs(int(arg))
         elif opt in ("-p", "--precision"):
             precision = abs(double(arg))
         elif opt in ("-o", "--ofile"):
             excelname = arg
     
     ## validation ##
-    if len(algorithm_name) == 0:
+    if len(algorithm_name) == 0        or \
+        not( dimension in dimensions)  or \
+        not(method in [1, 2]):
         print(wrong_syntax_msg)
-        sys.exit(2)
-
-    if not( dimension in dimensions):
-        print(wrong_dimensions_msg)
         sys.exit(2)
 
     if len(excelname) == 0:
@@ -144,14 +145,23 @@ def main(argv):
 
     data = double(data) # convert string to double
     df = createDataframe(data)
-    df = df.add(precision*2) # shift delta to 0 as global optimum delta value and removing 0 by adding precision again
-    # df = df.abs()
-
+    
+    print("\n\n=== Raw Data ===\n")
     print(df)
+
+    if method == 1:
+        df = df.add(precision) # shift delta to 0 as global optimum delta value and removing 0 by adding precision again
+        df = df.abs()
+        df = df.add(precision)
+    elif method == 2:
+        df.where(df >= precision, precision, inplace=True)
 
     df.where(df <= 1000, 1000, inplace=True)
     # when df <= 1000 then do not replace
     # when df > 1000 then replace with 1000
+    
+    print("\n\n=== Manipulated Data ===\n")
+    print(df)
 
     ## output value into exisiting excel template ##
     copyfile(os.path.join(dir, 'template.xlsx'), full_output_path)

@@ -46,9 +46,9 @@ function PSO_EDA(FUN, DIM, ftarget, maxfunevals)
 
         % Clamp veloctiy
         s = candidate_v < repmat(vmin,popsize,1);
-        candidate_v = (1-s).*candidate_v + s.*repmat(vmin,popsize,1);
+        candidate_v = ~s.*candidate_v + s.*repmat(vmin,popsize,1);
         b = candidate_v > repmat(vmax,popsize,1);
-        candidate_v = (1-b).*candidate_v + b.*repmat(vmax,popsize,1);
+        candidate_v = ~b.*candidate_v + b.*repmat(vmax,popsize,1);
 
         % Update position
         candidate_x = x + candidate_v;
@@ -56,14 +56,14 @@ function PSO_EDA(FUN, DIM, ftarget, maxfunevals)
         % Clamp position - Absorbing boundaries
         % Set candidate x to the boundary
         s = candidate_x < repmat(xmin,popsize,1);
-        candidate_x = (1-s).*candidate_x + s.*repmat(xmin,popsize,1);
+        candidate_x = ~s.*candidate_x + s.*repmat(xmin,popsize,1);
         b = candidate_x > repmat(xmax,popsize,1);
-        candidate_x = (1-b).*candidate_x + b.*repmat(xmax,popsize,1);
+        candidate_x = ~b.*candidate_x + b.*repmat(xmax,popsize,1);
 
         % Clamp position - Absorbing boundaries
         % Set candidate v to zero
         b = s | b;
-        candidate_v = (1-b).*candidate_v + b.*zeros(popsize,DIM);
+        candidate_v = ~b.*candidate_v + b.*zeros(popsize,DIM);
 
         % EDA part
         % Calculate Gaussian model where Mus and Sigma
@@ -88,7 +88,7 @@ function PSO_EDA(FUN, DIM, ftarget, maxfunevals)
         % update the equivelant counters
         r = rand(popsize,1)<p;
         R = repmat(r,1,DIM);
-        candidates = (1-R).*candidate_EDA_x + R.*candidate_x;
+        candidates = ~R.*candidate_EDA_x + R.*candidate_x;
         candidates_fitness = feval(FUN, candidates');
         tot_PSO = tot_PSO + sum(r);
         tot_EDA = tot_EDA + popsize - sum(r);
@@ -96,20 +96,19 @@ function PSO_EDA(FUN, DIM, ftarget, maxfunevals)
         % Update x if candidates are better
         c = candidates_fitness<cost_x;
         C = repmat(c',1,DIM);
-        x = (1-C).*x + C.*candidates;
-        v = (1-(R&C)).*v + (R&C).*candidate_v;
-        cost_x = (1-c).*cost_x + c.*candidates_fitness;
+        x = ~C.*x + C.*candidates;
+        v = ~(R&C).*v + (R&C).*candidate_v;
+        cost_x = ~c.*cost_x + c.*candidates_fitness;
 
         % Update success counters
-        % Update success counters
         num_PSO = num_PSO + sum(r&c');
-        num_EDA = num_EDA + sum((1-r)&c');
+        num_EDA = num_EDA + sum((~r)&c');
 
         % Update pbest if necessary
         c = cost_x<cost_p;
         C = repmat(c',1,DIM);
-        pbest = (1-C).*pbest + C.*x;
-        cost_p = (1-c).*cost_p + c.*cost_x;
+        pbest = ~C.*pbest + C.*x;
+        cost_p = ~c.*cost_p + c.*cost_x;
         % Update gbest if necessary
         [cost,index] = min(cost_p);
         gbest = pbest(index,:);

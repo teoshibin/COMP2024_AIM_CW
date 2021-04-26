@@ -95,7 +95,7 @@ function PSO_Bounds(FUN, DIM, ftarget, maxfunevals)
         if feval(FUN, 'fbest') < ftarget
             break;
         end
-    end 
+    end
 end
 
 
