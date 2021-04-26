@@ -1,4 +1,4 @@
-function xbest = GA(FUN, DIM, ftarget, maxfunevals)
+function GA(FUN, DIM, ftarget, maxfunevals)
     % samples new points uniformly randomly in [-5,5]^DIM
     % and evaluates them on FUN until ftarget of maxfunevals
     % is reached, or until 1e8 * DIM fevals are conducted. 
@@ -18,178 +18,159 @@ function xbest = GA(FUN, DIM, ftarget, maxfunevals)
     %     end
     %     
      %------Starting here is Own Implementation----%
-     addpath('./GA');
+    
+    % Initialise Parameters for Binary Encoding
+    % 1 sign bit, 3 integer bit, 28 decimal bits
+    BIT_SIZE = 32;
+    INT_BIT = 3;
+    DEC_BIT = BIT_SIZE - INT_BIT - 1;
 
     %% Problem Definition
-
-    CostFunction=@(x) MinOne(x);     % Cost Function
-
-    %nVar=50;            % Number of Decision Variables
-
-    nVar = DIM; %Decision Variable 
-    VarSize=[1 nVar]; % Decision Variables Matrix Size
+    MAX_VALUE = 5;
+    MIN_VALUE= -5;
 
     %% GA Parameters
 
     maxfunevals = min(1e8 * DIM, maxfunevals); 
+    counteval = 0;
 
-    nPop=85; 	% Population Size
+    nPop=floor(sqrt(maxfunevals)*4); 	% Population Size
 
-    MaxIt=ceil(maxfunevals/nPop);	% Maximum Number of Iterations
-
-    pc=0.8;                 % Crossover Percentage
-    nc=2*round(pc*nPop/2);  % Number of Offsprings (also Parnets)
-
-    pm=0.3;                 % Mutation Percentage
-    nm=round(pm*nPop);      % Number of Mutants
-    mu=0.02;                % Mutation Rate
-
-    %ANSWER=questdlg('Choose selection method:','Genetic Algorith',...
-    %'Roulette Wheel','Tournament','Random','Roulette Wheel');
-    %UseRouletteWheelSelection=strcmp(ANSWER,'Roulette Wheel');
-    %UseTournamentSelection=strcmp(ANSWER,'Tournament');
-    %UseRandomSelection=strcmp(ANSWER,'Random');
-
-    UseRouletteWheelSelection=0;
-    UseTournamentSelection= 1;
-    UseRandomSelection=0;
-
-    if UseRouletteWheelSelection
-        beta=8;         % Selection Pressure
-    end
-
-    if UseTournamentSelection
-        TournamentSize=3;   % Tournamnet Size
-    end
-
-    pause(0.01); % Needed due to a bug in older versions of MATLAB
+    pc=1.0;                 % Crossover Percentage
+    nc=2*round(pc*nPop/2);  % Number of Offsprings (also Parents)
+    
+    mu=2/(BIT_SIZE * DIM);  % Mutation Rate -- P_m in report
+    
+    TournamentSize = 3;
+   
 
     %% Initialization
-    empty_individual.Position=[];
+    empty_individual.Position=zeros(DIM,1);
+    empty_individual.Binary=zeros(DIM, BIT_SIZE);
     empty_individual.Cost=[];
 
     pop=repmat(empty_individual,nPop,1);
  
     % Evaluating the fitness function of the initial population
     for i=1:nPop
-
-        % Initialize Position
-        pop(i).Position=randi([0 1],VarSize);
+        % Initialize Population
+        pop(i).Position = MIN_VALUE + (MAX_VALUE-MIN_VALUE) * rand(DIM, 1);
+        
+        % Initialize Chromosomes
+        pop(i).Binary = ga_encode(pop(i).Position, BIT_SIZE, INT_BIT, DEC_BIT);
 
         % Evaluation
-        pop(i).Cost = feval(FUN, pop(i).Position');
-        
+        pop(i).Cost = feval(FUN, pop(i).Position);
     end
-
-    %[pop.Cost, idx] = feval(FUN, pop.Position);
+    counteval = counteval + nPop;
 
     % Sort Population
     Costs=[pop.Cost];
-    [Costs, SortOrder]=sort(Costs);
-    pop=pop(SortOrder);
-
-    % Store Best Solution
-    BestSol=pop(1);
-
-    % Array to Hold Best Cost Values
-    BestCost=zeros(MaxIt,1);
-
-    % Store Cost
-    WorstCost=pop(end).Cost;
+    [~, SortOrder]=sort(Costs);
+    pop = pop(SortOrder);
 
     %% Main Loop
-
-    for it=1:MaxIt
-
-        % Calculate Selection Probabilities
-        if UseRouletteWheelSelection
-            P=exp(-beta*Costs/WorstCost);
-            P=P/sum(P);
-        end
-
-        % Crossover
+    while counteval < maxfunevals
+     
         popc=repmat(empty_individual,nc/2,2);
         for k=1:nc/2
-
-            % Select Parents Indices
-            if UseRouletteWheelSelection
-                i1=RouletteWheelSelection(P);
-                i2=RouletteWheelSelection(P);
-            end
-            if UseTournamentSelection
-                i1=TournamentSelection(pop,TournamentSize);
-                i2=TournamentSelection(pop,TournamentSize);
-            end
-            if UseRandomSelection
-                i1=randi([1 nPop]);
-                i2=randi([1 nPop]);
-            end
+            % Selection
+            i1=tournament_selection(pop,TournamentSize);
+            i2=tournament_selection(pop,TournamentSize);
+            
 
             % Select Parents
             p1=pop(i1);
             p2=pop(i2);
 
             % Perform Crossover
-            [popc(k,1).Position, popc(k,2).Position]=Crossover(p1.Position,p2.Position);
-
+            [popc(k,1).Position, popc(k,2).Position] = crossover(p1.Position,p2.Position);
+            
+            % Perform Mutation
+            popc(k,1).Binary = ga_encode(popc(k,1).Position, BIT_SIZE, INT_BIT, DEC_BIT);
+            popc(k,1).Position = ga_decode(mutate(popc(k,1).Binary, mu), INT_BIT, DEC_BIT);
+            
+            popc(k,2).Binary = ga_encode(popc(k,2).Position, BIT_SIZE, INT_BIT, DEC_BIT);
+            popc(k,2).Position = ga_decode(mutate(popc(k,2).Binary, mu), INT_BIT, DEC_BIT);
+            
             % Evaluate Offsprings
-            popc(k,1).Cost=feval(FUN,popc(k,1).Position');
-            popc(k,2).Cost=feval(FUN,popc(k,2).Position');
-
+            popc(k,1).Cost=feval(FUN,popc(k,1).Position);
+            popc(k,2).Cost=feval(FUN,popc(k,2).Position);
         end
         popc=popc(:);
-        %[popc.Cost, idx] = feval(FUN, popc.Position);
-
-        % Mutation
-        popm=repmat(empty_individual,nm,1);
-        for k=1:nm
-
-            % Select Parent
-            i=randi([1 nPop]);
-            p=pop(i);
-
-            % Perform Mutation
-            popm(k).Position=Mutate(p.Position,mu);
-
-            % Evaluate Mutant
-             popm(k).Cost = feval(FUN, popm(k).Position');
-     
-        end
-
-       % [pop.Cost, idx] = feval(FUN, pop.Position);
-
-
+        counteval = counteval + nc;
+        
         % Create Merged Population
-        pop=[pop
-             popc
-             popm]; %#ok
+        pop=[pop 
+             popc]; %#ok
 
         % Sort Population
-        Costs=[pop.Cost];
-        [Costs, SortOrder]=sort(Costs);
-        pop=pop(SortOrder);
-
-        % Update Worst Cost
-        WorstCost=max(WorstCost,pop(end).Cost);
-
+        Costs = [pop.Cost];
+        [~, SortOrder] = sort(Costs);
+        pop = pop(SortOrder);
+        
         % Truncation
         pop=pop(1:nPop);
-        Costs=Costs(1:nPop);
-
-        % Store Best Solution Ever Found
-        BestSol=pop(1);
-
-        % Store Best Cost Ever Found
-        BestCost(it)=BestSol.Cost;
+        Costs=[];
 
         % Show Iteration Information
-    %    disp(['Iteration ' num2str(it) ': Best Cost = ' num2str(BestCost(it))]);
+        % fprintf("Iteration: %d --- Best: %f\n", it, fgeneric('fbest'));
 
-     % Exit if target is reached
+        % Exit if target is reached
         if feval(FUN, 'fbest') < ftarget
             break;
         end
     end
 end 
 
+
+
+function x = ga_decode(binary_x, int_bit, dec_bit)
+    x(:,1) = binary_x(:,2:end) * pow2([int_bit-1:-1:0 -(1:dec_bit)].');
+    x(binary_x(:,1)==1) = x(binary_x(:,1)==1) * -1;
+end
+
+function binary_x = ga_encode(x, bit_size, int_bit, dec_bit)
+    binary_x = zeros(numel(x), bit_size);
+    binary_x(:,1) = x < 0;
+    binary_x(:,2:end) = fix(abs(rem(x.*pow2(-(int_bit-1):dec_bit),2)));
+end
+
+function i = tournament_selection(pop,m)
+
+    nPop=numel(pop);
+
+    S=randsample(nPop,m);
+    
+    spop=pop(S);
+    
+    scosts=[spop.Cost];
+    
+    [~, j]=min(scosts);
+    
+    i=S(j);
+end
+
+function [y1, y2] = crossover(x1, x2)
+    nVar = numel(x1);
+    
+    x1 = x1';
+    x2 = x2';
+    
+    cc=randsample(nVar,2);
+    c1=min(cc);
+    c2=max(cc);
+    
+    y1=[x1(1:c1) x2(c1+1:c2) x1(c2+1:end)];
+    y2=[x2(1:c1) x1(c1+1:c2) x2(c2+1:end)];
+    
+    y1 = y1';
+    y2 = y2';
+end
+
+function y = mutate(x,mu)
+    [n, m] = size(x);
+    temp = rand(n,m);
+    y = abs(x - (temp < mu));
+end
   
