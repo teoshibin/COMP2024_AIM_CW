@@ -21,10 +21,9 @@ maxrestarts = 1e4;        % SET to zero for an entirely deterministic algorithm
 more off;  % in octave pagination is on by default
 
 t0 = clock;
-% rand('state', sum(100 * t0)); % THIS IS DEPRECIATED MATLAB CODE
-%rng('default', sum(100 * t0));
 
-rand('state', sum(100 * t0));
+%rng(sum(100 * t0)); % new code, doesn't work on old matlab
+rand('state', sum(100 * t0)); % THIS IS DEPRECIATED MATLAB CODE
 
 for dim = [2,3,5,10,20,40]  % small dimensions first, for CPU reasons
     for ifun = benchmarks('FunctionIndices')  % or benchmarksnoisy(...)

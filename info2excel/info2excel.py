@@ -40,8 +40,9 @@ def infoTo2dlist(dataset_folder, name, extensions, number_benchmarks):
     return data
 
 # convert 2d list to pandas dataframe
-def createDataframe(datalist, number_benchmarks):
+def createDataframe(datalist):
     number_instance = len(datalist[0])
+    number_benchmarks = len(datalist)
     mycolumns = ['Instance ' + str(x) for x in range(1, number_instance + 1)]
     myindex = ['f' + str(x) for x in range(1, number_benchmarks + 1)]
     df = pd.DataFrame(datalist, columns=mycolumns, index=myindex)
@@ -100,7 +101,7 @@ def main(argv):
 
     ### Main script ###
     ## error msg ##
-    wrong_syntax_msg = ('info2excel.py -i [ALGONAME] -d [DIMENSION] -o [EXCELNAME]\n'
+    wrong_syntax_msg = ('info2excel.py -i [ALGONAME] -d [DIMENSION] -p [precision] -o [EXCELNAME]\n'
                         'info2excel.py -i [ALGONAME]\n'
                         '-d & o by default is 5 & "[ALGONAME]_[DIMENSION]D"\n')
     wrong_dimensions_msg = '--dimension not found in' + str(dimensions)
@@ -142,9 +143,9 @@ def main(argv):
     data = querySpecificDimension(data, number_benchmarks, dimensions.index(dimension))
 
     data = double(data) # convert string to double
-    df = createDataframe(data, 24)
-    # df = df.add(precision) # shift value
-    df = df.abs()
+    df = createDataframe(data)
+    df = df.add(precision*2) # shift delta to 0 as global optimum delta value and removing 0 by adding precision again
+    # df = df.abs()
 
     print(df)
 
