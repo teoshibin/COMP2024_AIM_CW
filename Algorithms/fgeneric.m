@@ -57,15 +57,18 @@ function Fvalue = fgeneric(x, FUNC_ID, itrial, dataPath, PARAMS)
 %    LASTEVAL = FGENERIC('evaluations') returns the number of function
 %    evaluations since FGENERIC('initialize', ...) was called.
 %
-%    FBEST = FGENERIC('fbest') returns the best function value obtained.
-%    FBEST = FGENERIC('best') returns the best function value obtained.
+%    FBEST = FGENERIC('fbest') and
+%    FBEST = FGENERIC('best') return the best noise-free function value 
+%    seen since initialize.
 %
-%    FTARGET = FGENERIC('ftarget') returns the target function value.
+%    FTARGET = FGENERIC('ftarget') returns the final target function value.
 %
 %    FBEST = FGENERIC('finalize') should be called to indicate the end
 %    of a single run.  It writes data of the best-ever fitness value
 %    and of the final function evaluation. It closes the data files.
 %    FBEST is the best true fitness value ever obtained.
+%
+%    FGENERIC('restart', restart_reason) adds a line to the restart log .rdat.
 %
 %    Dependencies: benchmarks.m, benchmarksnoisy.m 
 %
@@ -86,8 +89,8 @@ function Fvalue = fgeneric(x, FUNC_ID, itrial, dataPath, PARAMS)
 
 %    Author: Raymond Ros, Nikolaus Hansen, Steffen Finck
 %        (firstName.lastName@lri.fr)
-%    Version = 'Revision: $Revision: 1736 $'
-%    Last Modified: $Date: 2010-02-08 00:41:02 +0100 (lun. 08 févr. 2010) $
+%    Version = 'Revision: $Revision: 3868 $'
+%    Last Modified: $Date: 2012-11-12 16:56:07 +0100 (Mon, 12 Nov 2012) $
 %
 
 %    Questions, comments:
@@ -193,7 +196,7 @@ function Fvalue = fgeneric(x, FUNC_ID, itrial, dataPath, PARAMS)
       %   Fopt = feval(actFunc, 'fopt');
       % end
 
-      Fvalue = Fopt + DeltaFtarget; % minimization
+      Fvalue = Fopt + DeltaFtarget;
 
       LastEval = struct('num', 0, 'F', inf, 'Fnoisy', inf, 'bestFnoisy',...
                        inf, 'x', []); % minimization
@@ -239,7 +242,7 @@ function Fvalue = fgeneric(x, FUNC_ID, itrial, dataPath, PARAMS)
         warning('FGENERIC:colrow','%s', ...
                ['The inputFormat field of PARAMS is expected to' ...
                ' match either ''col'' or ''row''. Attempting to' ...
-               'use default (''row'').']);
+               ' use default (''col'').']);
         isRowFormat = 0;
       end
       PARAMS.funcId = FUNC_ID;
@@ -338,6 +341,34 @@ function Fvalue = fgeneric(x, FUNC_ID, itrial, dataPath, PARAMS)
       Fvalue = maxFunEvalsFactor * FUNC_ID; % second argument FUNC_ID is the dimension.
       return;
 
+      elseif strcmpi(x, 'restart')
+        if nargin < 2
+          error('%s','Not enough arguments');
+        end
+        rbuffer = '';
+        rbuffer = [rbuffer sprintData(LastEval.num, LastEval.F, BestFEval.F, ...
+				      LastEval.Fnoisy, LastEval.bestFnoisy, LastEval.x,Fopt)];
+
+        if ~isempty(rbuffer)
+       	  if ~exist(CurrentPARAMS.rdataFile,'file')
+  	    warning('FGENERIC:rdataFileLost',...
+		    'The data file %s is not found. %s', ...
+		    CurrentPARAMS.rdataFile, ...
+		    ['Data will be written to a new, ' ...
+						       'empty file. Previously obtained data may be missing.']);
+          end
+          [rdataFileId,msg] = fopen(CurrentPARAMS.rdataFile,'a');
+          if rdataFileId < 0
+            warning('MATLAB:CouldNotOpen','Could not open %s: %s', ...
+		    CurrentPARAMS.rdataFile,msg);
+  	else
+ 	  fprintf(rdataFileId,'%% restart: %s\n', FUNC_ID);
+ 	  fprintf(rdataFileId,'%s ',rbuffer);
+          fclose(rdataFileId);
+         end
+       end
+       return;
+
     else
       error('FGENERIC:argin','%s', ...
              sprintf(' ''%s'' is not recognized as valid input.', x));
@@ -350,6 +381,10 @@ function Fvalue = fgeneric(x, FUNC_ID, itrial, dataPath, PARAMS)
              'either ''initialize'', ''finalize'' or a vector.'])
     end
   end % ischar(x)
+
+  if any(imag(x))  % alternative: x = real(x)
+    error('imaginare x-value is not allowed');
+  end
 
   %------------------------------------------------------------------------
   if isempty(actFunc)
@@ -383,6 +418,7 @@ function Fvalue = fgeneric(x, FUNC_ID, itrial, dataPath, PARAMS)
       CurrentPARAMS = setNextDataFile(CurrentPARAMS, 1);
       writeDataHeader(CurrentPARAMS.dataFile, Fopt);
       writeDataHeader(CurrentPARAMS.hdataFile, Fopt);
+      writeDataHeader(CurrentPARAMS.rdataFile, Fopt);
 
       if strcmp(CurrentPARAMS.dataFilePrefix, PreviousPARAMS.dataFilePrefix)
         addIndexEntry(CurrentPARAMS);
@@ -393,6 +429,7 @@ function Fvalue = fgeneric(x, FUNC_ID, itrial, dataPath, PARAMS)
       CurrentPARAMS = setNextDataFile(CurrentPARAMS, 0);
       writeDataHeader(CurrentPARAMS.dataFile, Fopt);
       writeDataHeader(CurrentPARAMS.hdataFile, Fopt);
+      writeDataHeader(CurrentPARAMS.rdataFile, Fopt);
 
       writeNewIndexEntry(CurrentPARAMS, 0);
     end
@@ -424,7 +461,7 @@ function Fvalue = fgeneric(x, FUNC_ID, itrial, dataPath, PARAMS)
   hbuffer = '';
 
   if (LastEval.num+POPSI >= evalsTrigger || bestFtrue-Fopt < fTrigger)
-
+    
     for j = 1:POPSI
       evalsj = LastEval.num + j;
 
@@ -447,7 +484,7 @@ function Fvalue = fgeneric(x, FUNC_ID, itrial, dataPath, PARAMS)
           BestFEval.isWritten = 1;
         end
 
-        buffer = [buffer sprintData(evalsj,Ftrue(j), BestFEval.F, ...
+        buffer = [buffer sprintData(evalsj, Ftrue(j), BestFEval.F, ...
                                 Fvalue(j), LastEval.bestFnoisy, x(:,j),Fopt)];
         while evalsj >= floor(10^(idxEvalsTrigger/nbPtsEvals))
           idxEvalsTrigger = idxEvalsTrigger + 1;
@@ -462,7 +499,7 @@ function Fvalue = fgeneric(x, FUNC_ID, itrial, dataPath, PARAMS)
 
       if (Ftrue(j) - Fopt < fTrigger)
 
-        hbuffer = [hbuffer sprintData(evalsj,Ftrue(j),BestFEval.F,...
+        hbuffer = [hbuffer sprintData(evalsj, Ftrue(j), BestFEval.F, ...
                                 Fvalue(j), LastEval.bestFnoisy, x(:,j),Fopt)];
 
         if Ftrue(j)-Fopt <= 0
@@ -498,6 +535,7 @@ function Fvalue = fgeneric(x, FUNC_ID, itrial, dataPath, PARAMS)
     end
     LastEval.bestFnoisy = min(LastEval.bestFnoisy,min(Fvalue));
   end % if (LastEval.num+POPSI >= evalsTrigger || bestFtrue-Fopt <= fTrigger)
+
 
   LastEval.num = LastEval.num + POPSI;
   LastEval.F = Ftrue(POPSI);
@@ -539,9 +577,6 @@ function Fvalue = fgeneric(x, FUNC_ID, itrial, dataPath, PARAMS)
       fclose(hdataFileId);
     end
   end
-
-
-  Fvalue = FvalueOut;
 
 end % function fgeneric
 
@@ -789,6 +824,11 @@ function PARAMS = setNextDataFile(PARAMS, isAllParamsMatching)
                     PARAMS.dataFilePrefix, ...
                     PARAMS.funcId, ...
                     PARAMS.dimension);
+  rdataFile = sprintf('%s_f%d_DIM%d.rdat', ...
+                    PARAMS.dataFilePrefix, ...
+                    PARAMS.funcId, ...
+                    PARAMS.dimension);
+
   % TODO check for existence of any data file: %s_f%d_DIM%d.*dat
   if ~isAllParamsMatching
     i = 0;
@@ -804,11 +844,14 @@ function PARAMS = setNextDataFile(PARAMS, isAllParamsMatching)
                          PARAMS.funcId, PARAMS.dimension);
       hdataFile = sprintf('%s_f%d_DIM%d.dat', dataFilePrefix, ...
                           PARAMS.funcId, PARAMS.dimension);
+      rdataFile = sprintf('%s_f%d_DIM%d.rdat', dataFilePrefix, ...
+                          PARAMS.funcId, PARAMS.dimension);
     end
   end
 
   PARAMS.dataFile = dataFile;
   PARAMS.hdataFile = hdataFile;
+  PARAMS.rdataFile = rdataFile;
   PARAMS.dataFilePrefix = dataFilePrefix;
 
 %   if i > 0
