@@ -4,14 +4,14 @@
 % CAPITALIZATION indicates code adaptations to be made
 
 addpath(pwd);  % should point to fgeneric.m etc.
-datapath = '../Datasets/PSO';  % different folder for each experiment
-opt.algName = 'PSO';
+datapath = '../Datasets/Bin_GA';  % different folder for each experiment
+opt.algName = 'Bin_GA';
 
 % opt.comments = 'Differential Evolution with Adaptive Encoding Algorithm'; % DEAE
-opt.comments = 'Partical Swarm Optimization'; % PSO
+% opt.comments = 'Partical Swarm Optimization'; % PSO
 % opt.comments = 'Population-Based Incremental Learning PSO'; % PSO_Bounds
 % opt.comments = 'PSO with Estimation of Distribution Evolutionary Algorithm'; % PSO_EDA
-% opt.comments = 'Binary Genetic Algorithm using Tournament Selection and Double Crossoover Mutation'; % Bin_GA
+opt.comments = 'Binary Genetic Algorithm using Tournament Selection and Double Crossoover Mutation'; % Bin_GA
 
 maxfunevals = '5e3'; % 10*dim is a short test-experiment taking a few minutes 
                           % INCREMENT maxfunevals successively to larger value(s)
@@ -46,7 +46,7 @@ for dim = [2,3,5,10,20,40]  % small dimensions first, for CPU reasons
 %                        eval(maxfunevals) - fgeneric('evaluations'));
                     
                 % Running Bin_GA Algorithm
-                PSO('fgeneric', dim, fgeneric('ftarget'), ...
+                GA('fgeneric', dim, fgeneric('ftarget'), ...
                         eval(maxfunevals) - fgeneric('evaluations'));
                 
                 % Running DE Algorithm
