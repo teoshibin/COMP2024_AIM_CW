@@ -121,7 +121,7 @@ function Fvalue = fgeneric(x, FUNC_ID, itrial, dataPath, PARAMS)
   persistent idxDIMEvalsTrigger;
   persistent maxFunEvalsFactor;  % times DIM = maxfunevals
 
-  DeltaFtarget = 1e-8;  % target function value is Fopt + DeltaFtarget
+  DeltaFtarget = 1e-16;  % target function value is Fopt + DeltaFtarget
 
   if isempty(DefaultPARAMS)
   % Loads defaultPARAMS into memory once instead of doing it every time
