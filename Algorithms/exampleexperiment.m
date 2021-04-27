@@ -4,10 +4,10 @@
 % CAPITALIZATION indicates code adaptations to be made
 
 addpath(pwd);  % should point to fgeneric.m etc.
-datapath = '../Datasets/JADE';  % different folder for each experiment
-opt.algName = 'JADE';
+datapath = '../Datasets/DE';  % different folder for each experiment
+opt.algName = 'DE';
 
-% opt.comments = 'Differential Evolution'; % DE
+ opt.comments = 'Differential Evolution'; % DE
 % opt.comments = 'Differential Evolution with Adaptive Encoding Algorithm'; % DEAE
 % opt.comments = 'Adaptive Differential Evolution with current-to-pbest mutation strategy'; % JADE 
 % opt.comments = 'Partical Swarm Optimization'; % PSO
@@ -52,12 +52,12 @@ for dim = [2,3,5,10,20,40]  % small dimensions first, for CPU reasons
                 %        eval(maxfunevals) - fgeneric('evaluations'));
                 
                 % Running DE Algorithm
-                % DE('fgeneric', dim, fgeneric('ftarget'), ...             
-                %       eval(maxfunevals) - fgeneric('evaluations'));
+                 DE('fgeneric', dim, fgeneric('ftarget'), ...             
+                       eval(maxfunevals) - fgeneric('evaluations'));
                     
                 % Running JADE Algorithm
-                 JADE('fgeneric', dim, fgeneric('ftarget'), ...             
-                       eval(maxfunevals) - fgeneric('evaluations'));
+                % JADE('fgeneric', dim, fgeneric('ftarget'), ...             
+                %       eval(maxfunevals) - fgeneric('evaluations'));
                 
                 % Running DEAE Algorithm
                 % DEAE('fgeneric', dim, fgeneric('ftarget'), ...             

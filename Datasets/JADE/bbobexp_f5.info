@@ -1,0 +1,18 @@
+funcId = 5, DIM = 2, Precision = 1.000e-16, algId = 'JADE'
+% Adaptive Differential Evolution with current-to-pbest mutation strategy
+data_f5\bbobexp_f5_DIM2.dat, 1:5000|-1.0e-16, 2:5000|-1.0e-16, 3:5000|-1.0e-16, 4:5000|-1.0e-16, 5:5000|-1.0e-16, 6:5000|-1.0e-16, 7:5000|-1.0e-16, 8:5000|-1.0e-16, 9:5000|-1.0e-16, 10:5000|-1.0e-16, 11:30|-3.7e-15, 12:5000|-1.0e-16, 13:5000|-1.0e-16, 14:5000|1.4e-14, 15:20|-9.9e-16
+funcId = 5, DIM = 3, Precision = 1.000e-16, algId = 'JADE'
+% Adaptive Differential Evolution with current-to-pbest mutation strategy
+data_f5\bbobexp_f5_DIM3.dat, 1:5010|-1.0e-16, 2:5010|-1.0e-16, 3:5010|-1.0e-16, 4:5010|-1.0e-16, 5:5010|-1.0e-16, 6:5010|-1.0e-16, 7:5010|-1.0e-16, 8:5010|-1.0e-16, 9:5010|-1.0e-16, 10:5010|-1.0e-16, 11:105|-3.7e-15, 12:5010|-1.0e-16, 13:5010|-1.0e-16, 14:5010|-1.0e-16, 15:60|-9.9e-16
+funcId = 5, DIM = 5, Precision = 1.000e-16, algId = 'JADE'
+% Adaptive Differential Evolution with current-to-pbest mutation strategy
+data_f5\bbobexp_f5_DIM5.dat, 1:325|-7.2e-15, 2:5000|-1.0e-16, 3:5000|1.4e-14, 4:300|-1.1e-13, 5:5000|-1.0e-16, 6:5000|-1.0e-16, 7:5000|-1.0e-16, 8:5000|-1.0e-16, 9:5000|-1.0e-16, 10:5000|-1.0e-16, 11:5000|1.1e-14, 12:5000|-1.0e-16, 13:5000|-1.0e-16, 14:175|-1.4e-14, 15:250|-9.9e-16
+funcId = 5, DIM = 10, Precision = 1.000e-16, algId = 'JADE'
+% Adaptive Differential Evolution with current-to-pbest mutation strategy
+data_f5\bbobexp_f5_DIM10.dat, 1:700|-7.2e-15, 2:5000|-1.0e-16, 3:850|-1.4e-14, 4:5000|-1.0e-16, 5:5000|1.4e-14, 6:5000|-1.0e-16, 7:5000|-1.0e-16, 8:5000|-1.0e-16, 9:650|-1.4e-14, 10:5000|-1.0e-16, 11:5000|1.1e-14, 12:500|-1.1e-13, 13:5000|-1.0e-16, 14:5000|1.4e-14, 15:750|-9.9e-16
+funcId = 5, DIM = 20, Precision = 1.000e-16, algId = 'JADE'
+% Adaptive Differential Evolution with current-to-pbest mutation strategy
+data_f5\bbobexp_f5_DIM20.dat, 1:5000|2.1e-14, 2:5000|1.1e-13, 3:1900|-1.4e-14, 4:5000|-1.0e-16, 5:5000|1.4e-14, 6:5000|-1.0e-16, 7:5000|2.8e-14, 8:5000|-1.0e-16, 9:1900|-1.4e-14, 10:5000|-1.0e-16, 11:5000|1.1e-14, 12:5000|1.1e-13, 13:5000|2.8e-14, 14:5000|1.4e-14, 15:5000|2.7e-14
+funcId = 5, DIM = 40, Precision = 1.000e-16, algId = 'JADE'
+% Adaptive Differential Evolution with current-to-pbest mutation strategy
+data_f5\bbobexp_f5_DIM40.dat, 1:5000|4.8e+01, 2:5000|4.4e+01, 3:5000|3.9e+01, 4:5000|2.5e+01, 5:5000|4.4e+01, 6:5000|3.2e+01, 7:5000|5.3e+01, 8:5000|4.1e+01, 9:5000|3.0e+01, 10:5000|4.4e+01, 11:5000|3.9e+01, 12:5000|3.5e+01, 13:5000|2.0e+01, 14:5000|3.7e+01, 15:5000|4.8e+01

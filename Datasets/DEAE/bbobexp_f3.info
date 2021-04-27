@@ -1,0 +1,18 @@
+funcId = 3, DIM = 2, Precision = 1.000e-16, algId = 'DEAE'
+% Differential Evolution with Adaptive Encoding Algorithm
+data_f3\bbobexp_f3_DIM2.dat, 1:5000|-1.0e-16, 2:5000|-1.0e-16, 3:5000|-1.0e-16, 4:5000|-1.0e-16, 5:5000|2.7e-01, 6:5000|-1.0e-16, 7:5000|-1.0e-16, 8:5000|-1.0e-16, 9:5000|-1.0e-16, 10:5000|-1.0e-16, 11:5000|-1.0e-16, 12:5000|-1.0e-16, 13:5000|-1.0e-16, 14:5000|-1.0e-16, 15:5000|-1.0e-16
+funcId = 3, DIM = 3, Precision = 1.000e-16, algId = 'DEAE'
+% Differential Evolution with Adaptive Encoding Algorithm
+data_f3\bbobexp_f3_DIM3.dat, 1:5010|-1.0e-16, 2:5010|-1.0e-16, 3:5010|-1.0e-16, 4:5010|-1.0e-16, 5:5010|-1.0e-16, 6:5010|2.8e-02, 7:5010|1.5e+00, 8:5010|4.1e-05, 9:5010|-1.0e-16, 10:5010|9.9e-01, 11:5010|9.9e-01, 12:5010|1.4e-01, 13:5010|9.9e-01, 14:5010|9.9e-01, 15:5010|-1.0e-16
+funcId = 3, DIM = 5, Precision = 1.000e-16, algId = 'DEAE'
+% Differential Evolution with Adaptive Encoding Algorithm
+data_f3\bbobexp_f3_DIM5.dat, 1:5000|5.4e+00, 2:5000|6.4e+00, 3:5000|2.1e+00, 4:5000|2.7e+00, 5:5000|8.7e+00, 6:5000|7.4e+00, 7:5000|5.0e+00, 8:5000|2.3e+00, 9:5000|4.1e+00, 10:5000|3.2e+00, 11:5000|4.0e+00, 12:5000|4.3e+00, 13:5000|5.4e+00, 14:5000|4.2e+00, 15:5000|4.5e+00
+funcId = 3, DIM = 10, Precision = 1.000e-16, algId = 'DEAE'
+% Differential Evolution with Adaptive Encoding Algorithm
+data_f3\bbobexp_f3_DIM10.dat, 1:5000|3.8e+01, 2:5000|4.8e+01, 3:5000|4.7e+01, 4:5000|4.6e+01, 5:5000|4.0e+01, 6:5000|3.5e+01, 7:5000|4.3e+01, 8:5000|4.2e+01, 9:5000|3.3e+01, 10:5000|4.5e+01, 11:5000|4.0e+01, 12:5000|5.1e+01, 13:5000|5.0e+01, 14:5000|4.4e+01, 15:5000|4.6e+01
+funcId = 3, DIM = 20, Precision = 1.000e-16, algId = 'DEAE'
+% Differential Evolution with Adaptive Encoding Algorithm
+data_f3\bbobexp_f3_DIM20.dat, 1:5000|1.9e+02, 2:5000|1.8e+02, 3:5000|2.0e+02, 4:5000|1.8e+02, 5:5000|1.8e+02, 6:5000|1.8e+02, 7:5000|1.7e+02, 8:5000|1.9e+02, 9:5000|1.5e+02, 10:5000|1.8e+02, 11:5000|1.9e+02, 12:5000|1.9e+02, 13:5000|2.1e+02, 14:5000|1.9e+02, 15:5000|1.7e+02
+funcId = 3, DIM = 40, Precision = 1.000e-16, algId = 'DEAE'
+% Differential Evolution with Adaptive Encoding Algorithm
+data_f3\bbobexp_f3_DIM40.dat, 1:5000|8.9e+02, 2:5000|8.8e+02, 3:5000|1.2e+03, 4:5000|9.5e+02, 5:5000|9.9e+02, 6:5000|9.6e+02, 7:5000|9.2e+02, 8:5000|7.8e+02, 9:5000|8.8e+02, 10:5000|9.0e+02, 11:5000|1.2e+03, 12:5000|9.9e+02, 13:5000|8.0e+02, 14:5000|7.6e+02, 15:5000|7.4e+02
