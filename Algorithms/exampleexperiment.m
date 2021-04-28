@@ -3,7 +3,7 @@
 % must be in the path of Matlab/Octave
 % CAPITALIZATION indicates code adaptations to be made
 
-addpath(pwd);  % should point to fgeneric.m etc.
+addpath(genpath(pwd)) % import current dir and subdir
 datapath = '../Datasets/DE';  % different folder for each experiment
 opt.algName = 'DE';
 
