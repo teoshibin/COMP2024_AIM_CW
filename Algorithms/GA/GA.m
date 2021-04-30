@@ -1,23 +1,27 @@
+% Binary Genenatic Algorithm
+% with tournement selection, two-point crossover & mutation with even
+% probibility
+%
+% GA
+%
+% This code is coded by us with online referencing.
+% Please find the online referenced source code citation as shown below.
+%%%--------------------------------------------------------------------------------------------------%%%
+%    Title: Binary and Real-Coded Genetic Algorithms
+%    Date: 2015
+%    Code version: 1
+%    Availability: https://www.mathworks.com/matlabcentral/fileexchange/52856-binary-and-real-coded-genetic-algorithms
+%%%--------------------------------------------------------------------------------------------------%%%
+
 function GA(FUN, DIM, ftarget, maxfunevals)
-    % samples new points uniformly randomly in [-5,5]^DIM
-    % and evaluates them on FUN until ftarget of maxfunevals
-    % is reached, or until 1e8 * DIM fevals are conducted. 
-    % 
-    %   maxfunevals = min(1e8 * DIM, maxfunevals); % donedone
-    %   popsize = min(maxfunevals, 200); % donedone
-    %   fbest = inf;
-    %   for iter = 1:ceil(maxfunevals/popsize)
-    %     xpop = 10 * rand(DIM, popsize) - 5;      % new solutions
-    %     [fvalues, idx] = sort(feval(FUN, xpop)); % evaluate
-    %     if fbest > fvalues(1)                    % keep best
-    %       fbest = fvalues(1);
-    %       xbest = xpop(:,idx(1));
-    %     end
-    %     if feval(FUN, 'fbest') < ftarget         % COCO-task achieved
-    %       break;                                 % (works also for noisy functions)
-    %     end
-    %     
-     %------Starting here is Own Implementation----%
+    % GA
+    % representation - a population with popsize of individual solutions,
+    %                  an individual with DIM of chromosomes, a chromosome 
+    %                  with 32 bit logical values that represents a float number
+    % selection      - tournement
+    % crossover      - two point
+    % mutation       - even probability with bit length
+    % termination    - fbest < ftarget
     
     % Initialise Parameters for Binary Encoding
     % 1 sign bit, 3 integer bit, 28 decimal bits

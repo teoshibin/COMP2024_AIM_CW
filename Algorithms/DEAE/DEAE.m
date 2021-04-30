@@ -1,3 +1,21 @@
+% Differential Evolution with Adaptive Encoding Algorithm
+%
+% DE with adaptive encoding is known to cater for rotational invariance 
+% especially when it comes to crossover of non-separable functions. 
+% This differs such that the offspring creation takes places 
+% in a different space provided by a linear transformation. 
+%
+% This code is a refactored version of the source code available online.
+% Please find the online source code citation as shown below.
+%%%--------------------------------------------------------------------------------------------------%%%
+%    Title: DEAE Source Code
+%    Author: Pošík and Klemš
+%    Date: 2012
+%    Code version: 1
+%    Availability: https://coco.gforge.inria.fr/doku.php?id=bbob-2012-algorithms
+%%%--------------------------------------------------------------------------------------------------%%%
+% (Version 1)[Source Code].https://coco.gforge.inria.fr/doku.php?id=bbob-2012-algorithms
+
 function [exitcode] = DEAE(FUN, DIM, ftarget, maxfunevals)
     % JADEAE_fn(FUN, {dim, setDE, setAE, setJA}, ftarget, maxfunevals)
     

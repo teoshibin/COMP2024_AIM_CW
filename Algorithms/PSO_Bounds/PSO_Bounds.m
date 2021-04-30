@@ -1,3 +1,18 @@
+% Partical Swarm Optimization with population-based incremental learning [1]
+% 
+% PSO_Bounds (PSO with PIBL)
+%
+% This code is a refactored version of the source code available online.
+% Please find the online source code citation as shown below.
+%%%--------------------------------------------------------------------------------------------------%%%
+%    Title: Black-Box Optimization Benchmarking for Noiseless
+%           Function Testbed using PSO_Bounds (PDF)
+%    Author: El-Abd and Kamel
+%    Date: 2009
+%    Code version: 1
+%    Availability: https://coco.gforge.inria.fr/doku.php?id=bbob-2009-algorithms
+%%%--------------------------------------------------------------------------------------------------%%%
+
 function PSO_Bounds(FUN, DIM, ftarget, maxfunevals)
 
     % Set algorithm parameters

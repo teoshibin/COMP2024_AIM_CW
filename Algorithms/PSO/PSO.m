@@ -1,10 +1,19 @@
- function PSO(FUN, DIM, ftarget, maxfunevals)
-% MY_OPTIMIZER(FUN, DIM, ftarget, maxfunevals)
-% samples new points uniformly randomly in [-5,5]^DIM
-% and evaluates them on FUN until ftarget of maxfunevals
-% is reached, or until 1e8 * DIM fevals are conducted. 
-% Relies on FUN to keep track of the best point. 
+% Partical Swarm Optimization
+%
+% PSO
+%
+% This code is a refactored version of the source code available online.
+% Please find the online source code citation as shown below.
+%%%--------------------------------------------------------------------------------------------------%%%
+%    Title: Black-Box Optimization Benchmarking for Noiseless 
+%           Function Testbed using Particle Swarm Optimization (PDF)
+%    Author: El-Abd and Kamel
+%    Date: 2009
+%    Code version: 1
+%    Availability: https://coco.gforge.inria.fr/doku.php?id=bbob-2009-algorithms
+%%%--------------------------------------------------------------------------------------------------%%%
 
+function PSO(FUN, DIM, ftarget, maxfunevals)
 % FUN - benchmark function
 % DIM - dimansions
 % ftarget - close enough to solution (not for the algorithm but for termination)

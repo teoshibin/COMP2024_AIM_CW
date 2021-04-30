@@ -1,3 +1,19 @@
+% Hybrid of Estimation Distribution Algorithm and Partical Swarm
+% Optimization
+%  
+% EDA-PSO
+%
+% This code is a refactored version of the source code available online.
+% Please find the online source code citation as shown below.
+%%%--------------------------------------------------------------------------------------------------%%%
+%    Title: Black-Box Optimization Benchmarking for Noiseless
+%           Function Testbed using an EDA and PSO Hybrid (PDF)
+%    Author: El-Abd and Kamel
+%    Date: 2009
+%    Code version: 1
+%    Availability: https://coco.gforge.inria.fr/doku.php?id=bbob-2009-algorithms
+%%%--------------------------------------------------------------------------------------------------%%%
+
 function PSO_EDA(FUN, DIM, ftarget, maxfunevals)
 
     % Set algorithm parameters
