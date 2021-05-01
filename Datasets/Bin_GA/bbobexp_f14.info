@@ -1,0 +1,18 @@
+funcId = 14, DIM = 2, Precision = 1.000e-16, algId = 'Bin_GA'
+% Binary Genetic Algorithm using Tournament Selection and Double Crossoover Mutation
+data_f14\bbobexp_f14_DIM2.dat, 1:2136|8.8e-05, 2:2136|9.8e-05, 3:2136|3.9e-05, 4:2136|6.8e-03, 5:2136|2.2e-04, 6:2136|3.7e-03, 7:2136|4.0e-04, 8:2136|4.1e-04, 9:2136|5.5e-04, 10:2136|1.0e-03, 11:2136|4.1e-07, 12:2136|1.1e-04, 13:2136|1.4e-04, 14:2136|8.8e-05, 15:2136|1.7e-03
+funcId = 14, DIM = 3, Precision = 1.000e-16, algId = 'Bin_GA'
+% Binary Genetic Algorithm using Tournament Selection and Double Crossoover Mutation
+data_f14\bbobexp_f14_DIM3.dat, 1:3079|2.7e-03, 2:3079|2.5e-03, 3:3079|6.4e-04, 4:3079|2.1e-03, 5:3079|1.6e-03, 6:3079|1.7e-03, 7:3079|3.4e-04, 8:3079|3.5e-03, 9:3079|5.7e-03, 10:3079|4.0e-03, 11:3079|1.2e-03, 12:3079|3.7e-03, 13:3079|3.5e-03, 14:3079|6.9e-03, 15:3079|2.1e-03
+funcId = 14, DIM = 5, Precision = 1.000e-16, algId = 'Bin_GA'
+% Binary Genetic Algorithm using Tournament Selection and Double Crossoover Mutation
+data_f14\bbobexp_f14_DIM5.dat, 1:5076|1.7e-03, 2:5076|1.2e-02, 3:5076|9.3e-03, 4:5076|1.3e-02, 5:5076|4.0e-03, 6:5076|4.6e-03, 7:5076|7.0e-03, 8:5076|1.0e-03, 9:5076|7.4e-03, 10:5076|4.1e-03, 11:5076|5.2e-03, 12:5076|2.1e-02, 13:5076|9.6e-03, 14:5076|1.8e-03, 15:5076|5.6e-03
+funcId = 14, DIM = 10, Precision = 1.000e-16, algId = 'Bin_GA'
+% Binary Genetic Algorithm using Tournament Selection and Double Crossoover Mutation
+data_f14\bbobexp_f14_DIM10.dat, 1:10000|5.5e-02, 2:10000|4.4e-02, 3:10000|3.1e-02, 4:10000|4.3e-02, 5:10000|1.2e-01, 6:10000|5.5e-02, 7:10000|8.5e-02, 8:10000|4.6e-02, 9:10000|5.1e-02, 10:10000|8.9e-02, 11:10000|5.2e-02, 12:10000|1.7e-01, 13:10000|7.8e-02, 14:10000|3.5e-02, 15:10000|2.5e-02
+funcId = 14, DIM = 20, Precision = 1.000e-16, algId = 'Bin_GA'
+% Binary Genetic Algorithm using Tournament Selection and Double Crossoover Mutation
+data_f14\bbobexp_f14_DIM20.dat, 1:20375|2.3e-01, 2:20375|2.0e-01, 3:20375|3.0e-01, 4:20375|4.7e-01, 5:20375|3.0e-01, 6:20375|2.6e-01, 7:20375|5.2e-01, 8:20375|3.1e-01, 9:20375|5.0e-01, 10:20375|2.0e-01, 11:20375|7.3e-01, 12:20375|5.6e-01, 13:20375|3.9e-01, 14:20375|2.4e-01, 15:20375|2.6e-01
+funcId = 14, DIM = 40, Precision = 1.000e-16, algId = 'Bin_GA'
+% Binary Genetic Algorithm using Tournament Selection and Double Crossoover Mutation
+data_f14\bbobexp_f14_DIM40.dat, 1:40000|1.0e+00, 2:40000|1.3e+00, 3:40000|1.6e+00, 4:40000|1.8e+00, 5:40000|2.6e+00, 6:40000|2.3e+00, 7:40000|7.0e-01, 8:40000|1.5e+00, 9:40000|1.8e+00, 10:40000|1.1e+00, 11:40000|1.4e+00, 12:40000|2.4e+00, 13:40000|1.9e+00, 14:40000|1.6e+00, 15:40000|1.1e+00
