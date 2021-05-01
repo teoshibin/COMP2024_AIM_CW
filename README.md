@@ -31,6 +31,7 @@ AI method coursework function optimization algorithm MATLAB code and datasets
 <p align="center" float="left">
   <img src="screenshots/1.jpg" width="716"/>
 </p>
+
 ### Excel Scores
 
 All tested algorithm with their corresponding scores in 5d
