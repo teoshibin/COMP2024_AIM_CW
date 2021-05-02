@@ -24,9 +24,14 @@ AI method coursework function optimization algorithm MATLAB code and datasets
 	> Path to datasets will be used as algorithm name in ppdata, this is why we cd into the datasets
 
 ## Generate Excel Score
-[see info2excel documentation](info2excel)
+[see info2excel documentation](https://github.com/teoshibin/info2excel)
 
 ## Results
+### Post Processing
+<p align="center" float="left">
+  <img src="screenshots/1.jpg" width="716"/>
+</p>
+
 ### Excel Scores
 
 All tested algorithm with their corresponding scores in 5d
