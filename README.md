@@ -3,28 +3,28 @@ AI method coursework function optimization algorithm MATLAB code and datasets
 
 # Usage
 ## Benchmarking
-- uncomment and comment different algorithms in [exampleexperiment](Algorithms/exampleexperiment.m)
-- generate data with [2010 BBOB framework](https://coco.gforge.inria.fr/doku.php?id=bbob-2010-downloads) by running [exampleexperiment](Algorithms/exampleexperiment.m) or dedicated experiment script in MATLAB
-	1. set path that points to fgeneric as "pwd" e.g. `addpath(pwd)`
-	2. set fgeneric `delta precision = 1e-16`
-	3. set `datapath = '../Datasets/ALGONAME'`
-	4. set `maxfunevals = '5e3'`
-	5. set random generator seed `rng('default')`
-- post-process data with [numbbo framework](https://github.com/numbbo/coco/)
+1. generate DEAE data with [experiment.m](Algorithms/experiment.m) by executing `experiment` in MATLAB
+	- current setup
+		1. path that points to fgeneric as "pwd" e.g. `addpath(pwd)`
+		2. fgeneric `delta precision = 1e-16`
+		3. `datapath = '../Datasets/ALGONAME'`
+		4. `maxfunevals = '5e3'`
+		5. random generator seed `rng('default')`
+2. post-process DEAE datasets with [numbbo framework](https://github.com/numbbo/coco/)
 
 	```Sh
 		python -m cocopp [-o OUTPUT_FOLDERNAME] YOURDATAFOLDER [MORE_DATAFOLDERS]
 	```
 	Example command
 	```Sh
-		cd Datasets
-		python -m cocopp -o "..\Post_Processing\PSO_ppdata" "PSO"
+		cd group04
+		python -m cocopp -o ".\" "DEAE"
 	```
 	> **Note**   
 	> Path to datasets will be used as algorithm name in ppdata, this is why we cd into the datasets
 
 ## Generate Excel Score
-[see info2excel documentation](info2excel)
+[see info2excel documentation](https://github.com/teoshibin/COMP2024_AIM_CW/tree/dev/info2excel)
 
 ## Results
 ### Excel Scores
