@@ -11,9 +11,9 @@ AI method coursework function optimization algorithm MATLAB code and datasets
 		4. `maxfunevals = '5e3'`
 		5. random generator seed `rng('default')`
 	
-	> ** Note **
-	> pre-generated datasets is included in Datasets folder
-	> experiment script is located in Algorithm folder
+	> **Note**   
+	> pre-generated datasets is included in Datasets folder   
+	> experiment script is located in Algorithm folder   
 
 2. post-process DEAE datasets with [numbbo framework](https://github.com/numbbo/coco/)
 
