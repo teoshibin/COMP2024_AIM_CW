@@ -7,9 +7,14 @@ AI method coursework function optimization algorithm MATLAB code and datasets
 	- current setup
 		1. path that points to fgeneric as "pwd" e.g. `addpath(pwd)`
 		2. fgeneric `delta precision = 1e-16`
-		3. `datapath = '../Datasets/ALGONAME'`
+		3. `datapath = '../Datasets/ALGONAME'` (output location)
 		4. `maxfunevals = '5e3'`
 		5. random generator seed `rng('default')`
+	
+	> ** Note **
+	> pre-generated datasets is included in Datasets folder
+	> experiment script is located in Algorithm folder
+
 2. post-process DEAE datasets with [numbbo framework](https://github.com/numbbo/coco/)
 
 	```Sh
@@ -17,7 +22,7 @@ AI method coursework function optimization algorithm MATLAB code and datasets
 	```
 	Example command
 	```Sh
-		cd group04
+		cd BBOB2010G04\Datasets
 		python -m cocopp -o ".\" "DEAE"
 	```
 	> **Note**   
@@ -26,13 +31,14 @@ AI method coursework function optimization algorithm MATLAB code and datasets
 ## Generate Excel Score
 [see info2excel documentation](https://github.com/teoshibin/COMP2024_AIM_CW/tree/dev/info2excel)
 
-## Results
-### Post Processing
+# Results
+
+## Post Processing
 <p align="center" float="left">
   <img src="screenshots/1.jpg" width="716"/>
 </p>
 
-### Excel Scores
+## Excel Scores
 
 All tested algorithm with their corresponding scores in 5d
 

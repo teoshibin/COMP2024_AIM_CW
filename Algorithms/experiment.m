@@ -1,6 +1,6 @@
 
 addpath(genpath(pwd));
-datapath = '../../DEAE'; % path with the experiment data
+datapath = '../Datasets/DEAE'; % path with the experiment data
 opt.algName = 'DEAE CCOVFAC study';     % name the experiment e.g.: 'DEAE with new feature'
 
 %  opt.comments = 'Differential Evolution'; % DE
